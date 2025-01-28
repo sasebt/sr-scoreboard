@@ -15,4 +15,6 @@ public interface MatchRepository {
     Match findMatch(String homeTeamName, String awayTeamName);
 
     Match update(Match match);
+
+    void delete(Match match);
 }

@@ -38,4 +38,9 @@ public class MatchRepositoryMemoryImpl implements MatchRepository {
     public Match update(Match match) {
         return match;
     }
+
+    @Override
+    public void delete(Match match) {
+        matches.remove(match);
+    }
 }
