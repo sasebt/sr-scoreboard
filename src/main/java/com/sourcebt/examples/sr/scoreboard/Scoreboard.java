@@ -42,5 +42,9 @@ public class Scoreboard {
     }
 
     public void updateScore(String teamA, int teamAScore, String teamB, int teamBScore) {
+        Match match = matchRepository.findMatch (teamA, teamB);
+        match.setHomeTeamScore(teamAScore);
+        match.setAwayTeamScore(teamBScore);
+        matchRepository.update (match);
     }
 }

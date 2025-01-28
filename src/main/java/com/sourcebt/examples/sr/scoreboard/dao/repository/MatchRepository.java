@@ -11,4 +11,8 @@ public interface MatchRepository {
     List<Match> getMatches();
 
     Match getMatch(int i);
+
+    Match findMatch(String homeTeamName, String awayTeamName);
+
+    void update(Match match);
 }

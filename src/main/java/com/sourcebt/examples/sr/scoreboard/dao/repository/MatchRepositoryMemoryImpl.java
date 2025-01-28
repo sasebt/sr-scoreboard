@@ -22,4 +22,19 @@ public class MatchRepositoryMemoryImpl implements MatchRepository {
     public Match getMatch(int i) {
         return matches.get(i);
     }
+
+    @Override
+    public Match findMatch(String homeTeamName, String awayTeamName) {
+        for (Match match: matches) {
+            if (homeTeamName.equals(match.getHomeTeamName()) && awayTeamName.equals(match.getAwayTeamName())) {
+                return match;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void update(Match match) {
+
+    }
 }
