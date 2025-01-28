@@ -15,7 +15,7 @@ public class Scoreboard {
         this.matchRepository = matchRepository;
     }
 
-    public void startNewMatch(String homeTeamName, String awayTeamName) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
+    public Match startNewMatch(String homeTeamName, String awayTeamName) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
         if (isTeamNameInvalid(homeTeamName) || isTeamNameInvalid(awayTeamName)) {
             throw new TeamNameInvalidException("for match: " + homeTeamName + " " + awayTeamName);
         }
@@ -23,7 +23,7 @@ public class Scoreboard {
         if (isTeamPlaying(homeTeamName) || isTeamPlaying(awayTeamName)) {
             throw new TeamAlreadyPlayingMatchException("for match: " + homeTeamName + " " + awayTeamName);
         }
-        matchRepository.create(new Match(homeTeamName, awayTeamName));
+        return matchRepository.create(new Match(homeTeamName, awayTeamName));
     }
 
     private boolean isTeamNameInvalid(String teamName) {
@@ -37,10 +37,6 @@ public class Scoreboard {
             }
         }
         return false;
-    }
-
-    public Match getMatch(int i) {
-        return matchRepository.getMatch(i);
     }
 
     public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException, TeamNameInvalidException, NoMatchFoundException {

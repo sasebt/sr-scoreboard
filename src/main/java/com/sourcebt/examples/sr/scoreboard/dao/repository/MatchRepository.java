@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface MatchRepository {
-    void create(Match match);
+    Match create(Match match);
 
     List<Match> getMatches();
 
@@ -14,5 +14,5 @@ public interface MatchRepository {
 
     Match findMatch(String homeTeamName, String awayTeamName);
 
-    void update(Match match);
+    Match update(Match match);
 }

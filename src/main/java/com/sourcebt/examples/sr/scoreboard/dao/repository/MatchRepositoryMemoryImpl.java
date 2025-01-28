@@ -9,8 +9,9 @@ public class MatchRepositoryMemoryImpl implements MatchRepository {
     List<Match> matches = new ArrayList<>();
 
     @Override
-    public void create(Match match) {
+    public Match create(Match match) {
         matches.add(match);
+        return match;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class MatchRepositoryMemoryImpl implements MatchRepository {
     }
 
     @Override
-    public void update(Match match) {
-
+    public Match update(Match match) {
+        return match;
     }
 }

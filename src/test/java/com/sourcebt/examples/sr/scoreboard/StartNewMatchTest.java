@@ -1,5 +1,6 @@
 package com.sourcebt.examples.sr.scoreboard;
 
+import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,15 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class StartNewMatchTest extends BaseTest {
 
-
-
     @Test
     void test_shouldSetScoreToZeroZero_whenStartNewMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
 
-        scoreboard.startNewMatch("team A", "team B");
+        Match match = scoreboard.startNewMatch("team A", "team B");
 
-        assertEquals(0, scoreboard.getMatch(0).getHomeTeamScore());
-        assertEquals(0, scoreboard.getMatch(0).getAwayTeamScore());
+        assertEquals(0, match.getHomeTeamScore());
+        assertEquals(0, match.getAwayTeamScore());
     }
 
     @Test

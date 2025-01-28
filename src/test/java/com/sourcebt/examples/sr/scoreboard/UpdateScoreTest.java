@@ -21,9 +21,7 @@ class UpdateScoreTest extends BaseTest {
     @Test
     void test_shouldUpdateScore_whenMatchStarted() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
 
-        scoreboard.startNewMatch("team A", "team B");
-
-        Match match = scoreboard.getMatch(0);
+        Match match = scoreboard.startNewMatch("team A", "team B");
 
         assertEquals(0, match.getHomeTeamScore());
         assertEquals(0, match.getHomeTeamScore());
@@ -58,16 +56,16 @@ class UpdateScoreTest extends BaseTest {
 
     @Test
     void test_shouldUpdateScoreCorrectMatch_whenUpdateScore() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
-        scoreboard.startNewMatch("team AA", "team BB");
-        scoreboard.startNewMatch("team AAA", "team BBB");
-        scoreboard.startNewMatch("team AAAA", "team BBBB");
+        Match match0 = scoreboard.startNewMatch("team A", "team B");
+        Match match1 = scoreboard.startNewMatch("team AA", "team BB");
+        Match match2 = scoreboard.startNewMatch("team AAA", "team BBB");
 
-        assertEquals(0, scoreboard.getMatch(1).getHomeTeamScore());
-        assertEquals(0, scoreboard.getMatch(1).getHomeTeamScore());
+        assertEquals(0, match1.getHomeTeamScore());
+        assertEquals(0, match1.getHomeTeamScore());
 
-        scoreboard.updateScore("team AAA", 2, "team BBB", 3);
+        scoreboard.updateScore(match1.getHomeTeamName(), 2, match1.getAwayTeamName(), 3);
 
-        assertEquals(2, scoreboard.getMatch(1).getHomeTeamScore());
-        assertEquals(3, scoreboard.getMatch(1).getAwayTeamScore());
+        assertEquals(2, match1.getHomeTeamScore());
+        assertEquals(3, match1.getAwayTeamScore());
     }
 }
