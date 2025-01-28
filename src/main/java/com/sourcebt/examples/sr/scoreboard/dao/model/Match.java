@@ -1,5 +1,7 @@
 package com.sourcebt.examples.sr.scoreboard.dao.model;
 
+import com.sourcebt.examples.sr.scoreboard.exceptions.InvalidScoreValueException;
+
 public class Match {
     private String homeTeamName;
     private String awayTeamName;
@@ -33,7 +35,10 @@ public class Match {
         return homeTeamScore;
     }
 
-    public void setHomeTeamScore(int homeTeamScore) {
+    public void setHomeTeamScore(int homeTeamScore) throws InvalidScoreValueException {
+        if (homeTeamScore < 0) {
+            throw new InvalidScoreValueException();
+        }
         this.homeTeamScore = homeTeamScore;
     }
 
@@ -41,7 +46,10 @@ public class Match {
         return awayTeamScore;
     }
 
-    public void setAwayTeamScore(int awayTeamScore) {
+    public void setAwayTeamScore(int awayTeamScore) throws InvalidScoreValueException {
+        if (awayTeamScore < 0) {
+            throw new InvalidScoreValueException();
+        }
         this.awayTeamScore = awayTeamScore;
     }
 

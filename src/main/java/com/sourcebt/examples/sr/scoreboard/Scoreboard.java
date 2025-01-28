@@ -43,9 +43,6 @@ public class Scoreboard {
     }
 
     public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException {
-        if (homeTeamScore<0 || awayTeamScore<0) {
-            throw new InvalidScoreValueException();
-        }
         Match match = matchRepository.findMatch (homeTeamName, awayTeamName);
         match.setHomeTeamScore(homeTeamScore);
         match.setAwayTeamScore(awayTeamScore);
