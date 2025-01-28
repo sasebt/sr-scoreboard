@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Tests for feature:
  * <p>
- * Finish match currently in progress. This removes a match from the scoreboard.
+ * Update score. This should receive a pair of absolute scores: home team score and away
+ * team score.
  */
 class UpdateScoreTest extends BaseTest {
 

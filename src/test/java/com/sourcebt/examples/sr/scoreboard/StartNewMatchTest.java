@@ -3,7 +3,6 @@ package com.sourcebt.examples.sr.scoreboard;
 import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -39,7 +39,7 @@ public class Scoreboard {
         return false;
     }
 
-    public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException, TeamNameInvalidException, NoMatchFoundException {
+    public Match updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException, TeamNameInvalidException, NoMatchFoundException {
         if (isTeamNameInvalid(homeTeamName) || isTeamNameInvalid(awayTeamName)) {
             throw new TeamNameInvalidException("for match: " + homeTeamName + " " + awayTeamName);
         }
@@ -50,5 +50,10 @@ public class Scoreboard {
         match.setHomeTeamScore(homeTeamScore);
         match.setAwayTeamScore(awayTeamScore);
         matchRepository.update(match);
+        return match;
+    }
+
+    public Match finishMatch(String homeTeamName, String awayTeamName) throws NoMatchFoundException {
+        return null;
     }
 }
