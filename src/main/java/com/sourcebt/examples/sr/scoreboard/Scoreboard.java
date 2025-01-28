@@ -4,6 +4,7 @@ package com.sourcebt.examples.sr.scoreboard;
 import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
 import com.sourcebt.examples.sr.scoreboard.dao.repository.MatchRepository;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
+import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 
 public class Scoreboard {
     MatchRepository matchRepository;
@@ -12,7 +13,7 @@ public class Scoreboard {
         this.matchRepository = matchRepository;
     }
 
-    public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException {
+    public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
         if (isTeamPlaying(teamA) || isTeamPlaying(teamB)) {
             throw new TeamAlreadyPlayingMatchException();
         }

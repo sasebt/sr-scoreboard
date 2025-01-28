@@ -1,7 +1,7 @@
 package com.sourcebt.examples.sr.scoreboard;
 
+import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ class StartNewMatchTest {
     }
 
     @Test
-    void test_shouldSetScoreToZeroZero_whenStartNewMatch() throws TeamAlreadyPlayingMatchException {
+    void test_shouldSetScoreToZeroZero_whenStartNewMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
 
         scoreboard.startNewMatch("team A", "team B");
 
@@ -35,7 +35,7 @@ class StartNewMatchTest {
     }
 
     @Test
-    void test_shouldThrowDuplicateException_whenStartNewMatch() throws TeamAlreadyPlayingMatchException {
+    void test_shouldThrowDuplicateException_whenStartNewMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
         scoreboard.startNewMatch("team A", "team B");
         scoreboard.startNewMatch("team C", "team D");
         scoreboard.startNewMatch("team E", "team F");
@@ -44,4 +44,14 @@ class StartNewMatchTest {
         assertThrows(TeamAlreadyPlayingMatchException.class, () -> scoreboard.startNewMatch("team E", "team X"));
     }
 
+    @Test()
+    void test_shouldThrowException_whenStartNewMatchTeamIsEmptyOrNull() {
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch(null, "team B"));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch("", "team B"));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch("    \t\n", "team B"));
+
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch("team A", null));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch("team A", ""));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.startNewMatch("team A", "    \t\n"));
+    }
 }
