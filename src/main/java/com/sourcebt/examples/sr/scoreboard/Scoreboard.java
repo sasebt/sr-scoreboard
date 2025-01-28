@@ -3,6 +3,7 @@ package com.sourcebt.examples.sr.scoreboard;
 
 import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
 import com.sourcebt.examples.sr.scoreboard.dao.repository.MatchRepository;
+import com.sourcebt.examples.sr.scoreboard.exceptions.InvalidScoreValueException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 
@@ -41,7 +42,7 @@ public class Scoreboard {
         return matchRepository.getMatch(i);
     }
 
-    public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) {
+    public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException {
         Match match = matchRepository.findMatch (homeTeamName, awayTeamName);
         match.setHomeTeamScore(homeTeamScore);
         match.setAwayTeamScore(awayTeamScore);
