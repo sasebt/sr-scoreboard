@@ -14,7 +14,7 @@ public class Scoreboard {
     }
 
     public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
-        if (teamA==null || teamB==null || teamA.isBlank() || teamB.isBlank()) {
+        if (isTeamNameInvalid(teamA) || isTeamNameInvalid(teamB)) {
             throw new TeamNameInvalidException();
         }
 
@@ -22,6 +22,10 @@ public class Scoreboard {
             throw new TeamAlreadyPlayingMatchException();
         }
         matchRepository.create(new Match(teamA, teamB));
+    }
+
+    private boolean isTeamNameInvalid (String teamName) {
+        return teamName == null || teamName.isBlank();
     }
 
     private boolean isTeamPlaying(String team) {
