@@ -42,4 +42,17 @@ class UpdateScoreTest extends BaseTest {
         assertThrows(InvalidScoreValueException.class, () -> scoreboard.updateScore("team A", -2, "team B", -3));
     }
 
+    @Test
+    void test_shouldThrowException_whenNoMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
+        scoreboard.startNewMatch("team A", "team B");
+
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team", -2, "team B", 3));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("", -2, "team B", 3));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore(null, -2, "team B", 3));
+
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, "team", 3));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, "", 3));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, null, 3));
+    }
+
 }
