@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *    b. Away team
  */
 class StartNewMatchTest {
+
     @Test
     void test_shouldSetScoreToZeroZero_whenStartNewMatch() {
         Scoreboard scoreboard = new Scoreboard();

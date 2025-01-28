@@ -6,6 +6,6 @@ public class Scoreboard {
     }
 
     public Match getMatch(int i) {
-        return null;
+        return new Match();
     }
 }
