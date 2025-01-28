@@ -2,6 +2,7 @@ package com.sourcebt.examples.sr.scoreboard;
 
 import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
 import com.sourcebt.examples.sr.scoreboard.exceptions.InvalidScoreValueException;
+import com.sourcebt.examples.sr.scoreboard.exceptions.NoMatchFoundException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class UpdateScoreTest extends BaseTest {
 
     @Test
-    void test_shouldUpdateScore_whenMatchStarted() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException {
+    void test_shouldUpdateScore_whenMatchStarted() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
 
         scoreboard.startNewMatch("team A", "team B");
 
@@ -46,11 +47,11 @@ class UpdateScoreTest extends BaseTest {
     void test_shouldThrowException_whenNoMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
         scoreboard.startNewMatch("team A", "team B");
 
-        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team", -2, "team B", 3));
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.updateScore("team", -2, "team B", 3));
         assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("", -2, "team B", 3));
         assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore(null, -2, "team B", 3));
 
-        assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, "team", 3));
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.updateScore("team A", -2, "team", 3));
         assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, "", 3));
         assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, null, 3));
     }
