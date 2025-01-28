@@ -56,4 +56,18 @@ class UpdateScoreTest extends BaseTest {
         assertThrows(TeamNameInvalidException.class, () -> scoreboard.updateScore("team A", -2, null, 3));
     }
 
+    @Test
+    void test_shouldUpdateScoreCorrectMatch_whenUpdateScore() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
+        scoreboard.startNewMatch("team AA", "team BB");
+        scoreboard.startNewMatch("team AAA", "team BBB");
+        scoreboard.startNewMatch("team AAAA", "team BBBB");
+
+        assertEquals(0, scoreboard.getMatch(2).getHomeTeamScore());
+        assertEquals(0, scoreboard.getMatch(2).getHomeTeamScore());
+
+        scoreboard.updateScore("team AAA", 2, "team BBB", 3);
+
+        assertEquals(2, scoreboard.getMatch(2).getHomeTeamScore());
+        assertEquals(3, scoreboard.getMatch(2).getAwayTeamScore());
+    }
 }
