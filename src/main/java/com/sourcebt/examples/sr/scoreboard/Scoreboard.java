@@ -40,4 +40,7 @@ public class Scoreboard {
     public Match getMatch(int i) {
         return matchRepository.getMatch(i);
     }
+
+    public void updateScore(String teamA, int teamAScore, String teamB, int teamBScore) {
+    }
 }
