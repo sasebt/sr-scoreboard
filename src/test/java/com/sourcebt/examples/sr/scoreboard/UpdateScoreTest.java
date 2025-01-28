@@ -62,12 +62,12 @@ class UpdateScoreTest extends BaseTest {
         scoreboard.startNewMatch("team AAA", "team BBB");
         scoreboard.startNewMatch("team AAAA", "team BBBB");
 
-        assertEquals(0, scoreboard.getMatch(2).getHomeTeamScore());
-        assertEquals(0, scoreboard.getMatch(2).getHomeTeamScore());
+        assertEquals(0, scoreboard.getMatch(1).getHomeTeamScore());
+        assertEquals(0, scoreboard.getMatch(1).getHomeTeamScore());
 
         scoreboard.updateScore("team AAA", 2, "team BBB", 3);
 
-        assertEquals(2, scoreboard.getMatch(2).getHomeTeamScore());
-        assertEquals(3, scoreboard.getMatch(2).getAwayTeamScore());
+        assertEquals(2, scoreboard.getMatch(1).getHomeTeamScore());
+        assertEquals(3, scoreboard.getMatch(1).getAwayTeamScore());
     }
 }
