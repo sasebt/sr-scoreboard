@@ -14,6 +14,10 @@ public class Scoreboard {
     }
 
     public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
+        if (teamA==null || teamB==null || teamA.isBlank() || teamB.isBlank()) {
+            throw new TeamNameInvalidException();
+        }
+
         if (isTeamPlaying(teamA) || isTeamPlaying(teamB)) {
             throw new TeamAlreadyPlayingMatchException();
         }
