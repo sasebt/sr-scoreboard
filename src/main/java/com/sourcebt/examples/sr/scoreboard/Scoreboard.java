@@ -1,23 +1,34 @@
 package com.sourcebt.examples.sr.scoreboard;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sourcebt.examples.sr.scoreboard.dao.model.Match;
+import com.sourcebt.examples.sr.scoreboard.dao.repository.MatchRepository;
+import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 
 public class Scoreboard {
-    List<Match> matches = new ArrayList<>();
+    MatchRepository matchRepository;
+
+    public void setMatchRepository(MatchRepository matchRepository) {
+        this.matchRepository = matchRepository;
+    }
 
     public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException {
-        for (Match match : matches) {
-            if (teamA.equals(match.getHomeTeamName()) || teamB.equals(match.getHomeTeamName()) || teamA.equals(match.getAwayTeamName()) || teamB.equals(match.getAwayTeamName())
-            ) {
-                throw new TeamAlreadyPlayingMatchException();
+        if (isTeamPlaying(teamA) || isTeamPlaying(teamB)) {
+            throw new TeamAlreadyPlayingMatchException();
+        }
+        matchRepository.create(new Match(teamA, teamB));
+    }
+
+    private boolean isTeamPlaying(String team) {
+        for (Match match: matchRepository.getMatches ()) {
+            if (team.equals(match.getHomeTeamName()) || team.equals(match.getAwayTeamName())) {
+                return true;
             }
         }
-        matches.add(new Match(teamA, teamB));
+        return false;
     }
 
     public Match getMatch(int i) {
-        return matches.get(i);
+        return matchRepository.getMatch(i);
     }
 }

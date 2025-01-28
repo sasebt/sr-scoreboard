@@ -1,4 +1,4 @@
-package com.sourcebt.examples.sr.scoreboard;
+package com.sourcebt.examples.sr.scoreboard.exceptions;
 
 public class TeamAlreadyPlayingMatchException extends Exception {
 }

@@ -1,5 +1,8 @@
 package com.sourcebt.examples.sr.scoreboard;
 
+import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,9 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class StartNewMatchTest {
 
+    Scoreboard scoreboard;
+
+    @BeforeEach
+    public void setup() {
+        scoreboard = ScoreboardFactory.createInMemoryFactory();
+    }
+
     @Test
     void test_shouldSetScoreToZeroZero_whenStartNewMatch() throws TeamAlreadyPlayingMatchException {
-        Scoreboard scoreboard = new Scoreboard();
+
         scoreboard.startNewMatch("team A", "team B");
 
         assertEquals(0, scoreboard.getMatch(0).getHomeTeamScore());
@@ -26,7 +36,6 @@ class StartNewMatchTest {
 
     @Test
     void test_shouldThrowDuplicateException_whenStartNewMatch() throws TeamAlreadyPlayingMatchException {
-        Scoreboard scoreboard = new Scoreboard();
         scoreboard.startNewMatch("team A", "team B");
         scoreboard.startNewMatch("team C", "team D");
         scoreboard.startNewMatch("team E", "team F");

@@ -1,4 +1,4 @@
-package com.sourcebt.examples.sr.scoreboard;
+package com.sourcebt.examples.sr.scoreboard.dao.model;
 
 public class Match {
     private String homeTeamName;
