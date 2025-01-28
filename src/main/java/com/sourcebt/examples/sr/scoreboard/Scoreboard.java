@@ -13,24 +13,24 @@ public class Scoreboard {
         this.matchRepository = matchRepository;
     }
 
-    public void startNewMatch(String teamA, String teamB) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
-        if (isTeamNameInvalid(teamA) || isTeamNameInvalid(teamB)) {
+    public void startNewMatch(String homeTeamName, String awayTeamName) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
+        if (isTeamNameInvalid(homeTeamName) || isTeamNameInvalid(awayTeamName)) {
             throw new TeamNameInvalidException();
         }
 
-        if (isTeamPlaying(teamA) || isTeamPlaying(teamB)) {
+        if (isTeamPlaying(homeTeamName) || isTeamPlaying(awayTeamName)) {
             throw new TeamAlreadyPlayingMatchException();
         }
-        matchRepository.create(new Match(teamA, teamB));
+        matchRepository.create(new Match(homeTeamName, awayTeamName));
     }
 
     private boolean isTeamNameInvalid (String teamName) {
         return teamName == null || teamName.isBlank();
     }
 
-    private boolean isTeamPlaying(String team) {
+    private boolean isTeamPlaying(String teamName) {
         for (Match match: matchRepository.getMatches ()) {
-            if (team.equals(match.getHomeTeamName()) || team.equals(match.getAwayTeamName())) {
+            if (teamName.equals(match.getHomeTeamName()) || teamName.equals(match.getAwayTeamName())) {
                 return true;
             }
         }
@@ -41,10 +41,10 @@ public class Scoreboard {
         return matchRepository.getMatch(i);
     }
 
-    public void updateScore(String teamA, int teamAScore, String teamB, int teamBScore) {
-        Match match = matchRepository.findMatch (teamA, teamB);
-        match.setHomeTeamScore(teamAScore);
-        match.setAwayTeamScore(teamBScore);
+    public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) {
+        Match match = matchRepository.findMatch (homeTeamName, awayTeamName);
+        match.setHomeTeamScore(homeTeamScore);
+        match.setAwayTeamScore(awayTeamScore);
         matchRepository.update (match);
     }
 }

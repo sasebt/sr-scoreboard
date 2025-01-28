@@ -16,14 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * a. Home team
  * b. Away team
  */
-class StartNewMatchTest {
+class StartNewMatchTest extends BaseTest {
 
-    Scoreboard scoreboard;
 
-    @BeforeEach
-    public void setup() {
-        scoreboard = ScoreboardFactory.createInMemoryFactory();
-    }
 
     @Test
     void test_shouldSetScoreToZeroZero_whenStartNewMatch() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {

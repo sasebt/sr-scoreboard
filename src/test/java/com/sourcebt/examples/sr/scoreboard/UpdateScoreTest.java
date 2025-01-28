@@ -13,14 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * <p>
  * Finish match currently in progress. This removes a match from the scoreboard.
  */
-class UpdateScoreTest {
-    private Scoreboard scoreboard;
-
-
-    @BeforeEach
-    public void setup() {
-        scoreboard = ScoreboardFactory.createInMemoryFactory();
-    }
+class UpdateScoreTest extends BaseTest {
 
     @Test
     void test_shouldUpdateScore_whenMatchStarted() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
