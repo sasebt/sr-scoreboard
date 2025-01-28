@@ -35,22 +35,22 @@ public class Match {
         return homeTeamScore;
     }
 
-    public void setHomeTeamScore(int homeTeamScore) throws InvalidScoreValueException {
-        if (homeTeamScore < 0) {
-            throw new InvalidScoreValueException();
+    public void setHomeTeamScore(int score) throws InvalidScoreValueException {
+        if (score < 0) {
+            throw new InvalidScoreValueException("setting home score to " + score + " for match " + getHomeTeamName() + " " + getAwayTeamName());
         }
-        this.homeTeamScore = homeTeamScore;
+        this.homeTeamScore = score;
     }
 
     public int getAwayTeamScore() {
         return awayTeamScore;
     }
 
-    public void setAwayTeamScore(int awayTeamScore) throws InvalidScoreValueException {
-        if (awayTeamScore < 0) {
-            throw new InvalidScoreValueException();
+    public void setAwayTeamScore(int score) throws InvalidScoreValueException {
+        if (score < 0) {
+            throw new InvalidScoreValueException("setting home score to " + score + " for match " + getHomeTeamName() + " " + getAwayTeamName());
         }
-        this.awayTeamScore = awayTeamScore;
+        this.awayTeamScore = score;
     }
 
     public int getSumScores() {

@@ -17,11 +17,11 @@ public class Scoreboard {
 
     public void startNewMatch(String homeTeamName, String awayTeamName) throws TeamAlreadyPlayingMatchException, TeamNameInvalidException {
         if (isTeamNameInvalid(homeTeamName) || isTeamNameInvalid(awayTeamName)) {
-            throw new TeamNameInvalidException();
+            throw new TeamNameInvalidException("for match: " + homeTeamName + " " + awayTeamName);
         }
 
         if (isTeamPlaying(homeTeamName) || isTeamPlaying(awayTeamName)) {
-            throw new TeamAlreadyPlayingMatchException();
+            throw new TeamAlreadyPlayingMatchException("for match: " + homeTeamName + " " + awayTeamName);
         }
         matchRepository.create(new Match(homeTeamName, awayTeamName));
     }
@@ -45,11 +45,11 @@ public class Scoreboard {
 
     public void updateScore(String homeTeamName, int homeTeamScore, String awayTeamName, int awayTeamScore) throws InvalidScoreValueException, TeamNameInvalidException, NoMatchFoundException {
         if (isTeamNameInvalid(homeTeamName) || isTeamNameInvalid(awayTeamName)) {
-            throw new TeamNameInvalidException();
+            throw new TeamNameInvalidException("for match: " + homeTeamName + " " + awayTeamName);
         }
         Match match = matchRepository.findMatch(homeTeamName, awayTeamName);
         if (match == null) {
-            throw new NoMatchFoundException();
+            throw new NoMatchFoundException("for match: " + homeTeamName + " " + awayTeamName);
         }
         match.setHomeTeamScore(homeTeamScore);
         match.setAwayTeamScore(awayTeamScore);
