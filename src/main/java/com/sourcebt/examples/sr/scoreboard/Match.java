@@ -2,10 +2,10 @@ package com.sourcebt.examples.sr.scoreboard;
 
 public class Match {
     public int getHomeTeamScore() {
-        return -1;
+        return 0;
     }
 
     public int getAwayTeamScore() {
-        return -1;
+        return 0;
     }
 }
