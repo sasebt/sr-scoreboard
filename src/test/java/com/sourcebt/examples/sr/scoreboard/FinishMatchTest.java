@@ -20,8 +20,8 @@ class FinishMatchTest extends BaseTest {
     void test_shouldRemoveMatch_whenMatchFinished() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
         Match match = scoreboard.startNewMatch("team A", "team B");
         scoreboard.updateScore(match.getHomeTeamName(), 5, match.getAwayTeamName(), 10);
-        scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName());
-        assertThrows(NoMatchFoundException.class, () -> scoreboard.updateScore(match.getHomeTeamName(), 5, match.getAwayTeamName(), 10));
+        Match deletedMatch = scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName());
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.updateScore(deletedMatch.getHomeTeamName(), 5, deletedMatch.getAwayTeamName(), 10));
     }
 
 }
