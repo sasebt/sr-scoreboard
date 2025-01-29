@@ -6,8 +6,19 @@ import java.util.Collection;
 import java.util.List;
 
 public interface MatchRepository {
+
+    /**
+     * Creates a new repository entry
+     *
+     * @param match
+     * @return the created resource
+     */
     Match create(Match match);
 
+    /**
+     * Queries all
+     * @return
+     */
     List<Match> getMatches();
 
     Match getMatch(int i);

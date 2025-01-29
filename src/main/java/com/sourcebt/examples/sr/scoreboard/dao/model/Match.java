@@ -8,6 +8,11 @@ public class Match  implements Comparable<Match> {
     private int homeTeamScore;
     private int awayTeamScore;
 
+    /**
+     * Creates a new Match instance with score 0:0
+     * @param homeTeamName
+     * @param awayTeamName
+     */
     public Match(String homeTeamName, String awayTeamName) {
         this.homeTeamName = homeTeamName;
         this.awayTeamName = awayTeamName;
@@ -53,6 +58,11 @@ public class Match  implements Comparable<Match> {
         this.awayTeamScore = score;
     }
 
+    /**
+     * Calculates the sum of the scores in the match (used for sorting)
+     *
+     * @return the sum of the scores of the home and the away team
+     */
     public int getSumScores() {
         return getHomeTeamScore() + getAwayTeamScore();
     }
