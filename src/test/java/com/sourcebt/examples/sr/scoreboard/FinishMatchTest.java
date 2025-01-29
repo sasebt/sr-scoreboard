@@ -29,7 +29,18 @@ class FinishMatchTest extends BaseTest {
     void test_shouldThrowException_whenNonexistingMatchFinished() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, NoMatchFoundException {
         Match match = scoreboard.startNewMatch("team A", "team B");
         assertThrows(NoMatchFoundException.class, () -> scoreboard.finishMatch(match.getHomeTeamName() + "invalid", match.getAwayTeamName()));
-        assertThrows(NoMatchFoundException.class, () -> scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName() + "invalid" ));
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName() + "invalid"));
+    }
+
+    @Test
+    void test_shouldThrowException_whenInvalidTeamName() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, NoMatchFoundException {
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch(null, "valid name"));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch("", "valid name"));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch("    ", "valid name"));
+
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch("valid name", null));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch( "valid name", ""));
+        assertThrows(TeamNameInvalidException.class, () -> scoreboard.finishMatch("valid name", "    "));
     }
 
 }
