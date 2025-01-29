@@ -8,6 +8,8 @@ import com.sourcebt.examples.sr.scoreboard.exceptions.NoMatchFoundException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Scoreboard {
@@ -68,6 +70,10 @@ public class Scoreboard {
     }
 
     public List<Match> getScoreboardSummary() {
-        return null;
+        List<Match> matches = matchRepository.getMatches();
+        List<Match> scoreboard = new ArrayList<>(matches);
+        Collections.sort(scoreboard);
+        Collections.reverse(scoreboard);
+        return scoreboard;
     }
 }

@@ -2,7 +2,7 @@ package com.sourcebt.examples.sr.scoreboard.dao.model;
 
 import com.sourcebt.examples.sr.scoreboard.exceptions.InvalidScoreValueException;
 
-public class Match {
+public class Match  implements Comparable<Match> {
     private String homeTeamName;
     private String awayTeamName;
     private int homeTeamScore;
@@ -55,5 +55,15 @@ public class Match {
 
     public int getSumScores() {
         return getHomeTeamScore() + getAwayTeamScore();
+    }
+
+    @Override
+    public int compareTo(Match scoreBoardItem) {
+        return Integer.compare(getSumScores(), scoreBoardItem.getSumScores());
+    }
+
+    @Override
+    public String toString() {
+        return getHomeTeamName() + " " + getHomeTeamScore() + " : " + getAwayTeamScore() + " " + getAwayTeamName();
     }
 }
