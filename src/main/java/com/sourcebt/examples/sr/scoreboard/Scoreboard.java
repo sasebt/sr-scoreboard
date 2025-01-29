@@ -55,7 +55,6 @@ public class Scoreboard {
 
     public Match finishMatch(String homeTeamName, String awayTeamName) throws NoMatchFoundException {
         Match match = matchRepository.findMatch(homeTeamName, awayTeamName);
-        matchRepository.delete (match);
-        return match;
+        return matchRepository.delete (match);
     }
 }

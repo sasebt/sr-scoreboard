@@ -40,7 +40,8 @@ public class MatchRepositoryMemoryImpl implements MatchRepository {
     }
 
     @Override
-    public void delete(Match match) {
+    public Match delete(Match match) {
         matches.remove(match);
+        return match;
     }
 }

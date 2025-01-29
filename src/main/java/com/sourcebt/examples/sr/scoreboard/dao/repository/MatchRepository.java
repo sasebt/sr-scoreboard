@@ -16,5 +16,5 @@ public interface MatchRepository {
 
     Match update(Match match);
 
-    void delete(Match match);
+    Match delete(Match match);
 }
