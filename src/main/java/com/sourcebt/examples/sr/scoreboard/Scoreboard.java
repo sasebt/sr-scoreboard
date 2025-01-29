@@ -55,6 +55,9 @@ public class Scoreboard {
 
     public Match finishMatch(String homeTeamName, String awayTeamName) throws NoMatchFoundException {
         Match match = matchRepository.findMatch(homeTeamName, awayTeamName);
+        if (match == null) {
+            throw new NoMatchFoundException("for match: " + homeTeamName + " " + awayTeamName);
+        }
         return matchRepository.delete (match);
     }
 }
