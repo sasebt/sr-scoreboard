@@ -8,6 +8,8 @@ import com.sourcebt.examples.sr.scoreboard.exceptions.NoMatchFoundException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
 
+import java.util.List;
+
 public class Scoreboard {
     MatchRepository matchRepository;
 
@@ -63,5 +65,9 @@ public class Scoreboard {
             throw new NoMatchFoundException("for match: " + homeTeamName + " " + awayTeamName);
         }
         return matchRepository.delete (match);
+    }
+
+    public List<Match> getScoreboardSummary() {
+        return null;
     }
 }
