@@ -5,6 +5,7 @@ import com.sourcebt.examples.sr.scoreboard.exceptions.InvalidScoreValueException
 import com.sourcebt.examples.sr.scoreboard.exceptions.NoMatchFoundException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamAlreadyPlayingMatchException;
 import com.sourcebt.examples.sr.scoreboard.exceptions.TeamNameInvalidException;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,12 +17,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class FinishMatchTest extends BaseTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void test_shouldRemoveMatch_whenMatchFinished() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, InvalidScoreValueException, NoMatchFoundException {
         Match match = scoreboard.startNewMatch("team A", "team B");
         scoreboard.updateScore(match.getHomeTeamName(), 5, match.getAwayTeamName(), 10);
         Match deletedMatch = scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName());
         assertThrows(NoMatchFoundException.class, () -> scoreboard.updateScore(deletedMatch.getHomeTeamName(), 5, deletedMatch.getAwayTeamName(), 10));
+    }
+
+    @Test
+    void test_shouldNotRemoveMatch_whenNonexistingMatchFinished() throws TeamAlreadyPlayingMatchException, TeamNameInvalidException, NoMatchFoundException {
+        Match match = scoreboard.startNewMatch("team A", "team B");
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.finishMatch(match.getHomeTeamName() + "invalid", match.getAwayTeamName()));
+        assertThrows(NoMatchFoundException.class, () -> scoreboard.finishMatch(match.getHomeTeamName(), match.getAwayTeamName() + "invalid" ));
     }
 
 }
